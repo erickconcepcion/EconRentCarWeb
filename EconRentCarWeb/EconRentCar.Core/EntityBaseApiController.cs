@@ -26,7 +26,7 @@ namespace EconRentCar.Core
         [HttpGet]
         public virtual IActionResult GetAllInclude(bool included = false, string properties = null)
         {
-            var props = properties != null ? properties : IncludedProperties;
+            var props = properties ?? IncludedProperties;
             var models = included ? Service.GetIncluding(props) : Service.Get();
 
             var result = _mapper.Map<IEnumerable<VM>>(models);
@@ -37,7 +37,7 @@ namespace EconRentCar.Core
         public virtual IActionResult Get(Guid id, bool included = false, string properties = null)
         {
 
-            var props = properties != null ? properties : IncludedProperties;
+            var props = properties ?? IncludedProperties;
             var model = included ? Service.Find(id, props) : Service.Find(id);
             var vm = _mapper.Map<VM>(model); ;
             return Ok(vm);

@@ -15,4 +15,12 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.0.2105168" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\EconRentCar.Common\EconRentCar.Common.csproj" />
+    <ProjectReference Include="..\EconRentCar.Core\EconRentCar.Core.csproj" />
+    <ProjectReference Include="..\EconRentCar.DataModel\EconRentCar.DataModel.csproj" />
+    <ProjectReference Include="..\EconRentCar.Logics\EconRentCar.Logics.csproj" />
+  </ItemGroup>
+
 </Project>

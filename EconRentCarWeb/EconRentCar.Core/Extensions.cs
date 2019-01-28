@@ -399,14 +399,14 @@ namespace EconRentCar.Core
         public static DateTime ConvertToSafeDateTimeEs(this string data)
         {
             var result = StringToDateFieldEs(data) as DateTime?;
-            return result.HasValue ? result.Value : new DateTime(1900, 1, 1);
+            return result ?? new DateTime(1900, 1, 1);
         }
 
         public static DateTime ConvertToSafeDateTime2(this string data, CultureInfo info = null)
         {
             var result = StringToDateField(data) as DateTime?;
 
-            return result.HasValue ? result.Value : new DateTime(1900, 1, 1);
+            return result ?? new DateTime(1900, 1, 1);
         }
 
         public static DateTime ConvertToSafeDateTimeWithFormat(this string data, string format = "MMddyyyy",

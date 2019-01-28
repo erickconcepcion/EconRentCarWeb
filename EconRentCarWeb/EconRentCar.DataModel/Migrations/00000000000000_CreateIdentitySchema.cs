@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace EconRentCar.Api.Data.Migrations
+namespace EconRentCar.DataModel.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {
