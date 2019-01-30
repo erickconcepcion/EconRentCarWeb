@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 
 namespace EconRentCar.Logics.Repositories
 {
-    public interface IAppUserRepository : IEntityBaseRepository<AppUser>
-    {
-    }
+    
     public interface IClienteRepository : IEntityBaseRepository<Cliente>
     {
     }

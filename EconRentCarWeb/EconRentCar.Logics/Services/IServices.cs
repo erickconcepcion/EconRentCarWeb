@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 
 namespace EconRentCar.Logics.Services
 {
-    public interface IAppUserService : IEntityBaseService<AppUser>
-    {
-    }
+    
     public interface IClienteService : IEntityBaseService<Cliente>
     {
     }
