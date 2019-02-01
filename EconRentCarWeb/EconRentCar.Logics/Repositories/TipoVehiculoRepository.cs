@@ -13,7 +13,7 @@ namespace EconRentCar.Logics.Repositories
 {
     public class TipoVehiculoRepository : EntityBaseRepository<TipoVehiculo>, ITipoVehiculoRepository
     {
-        private TipoVehiculoRepository(DbContext db)
+        public TipoVehiculoRepository(ApplicationDbContext db)
             : base(db)
         {
 

@@ -26,11 +26,11 @@ namespace EconRentCar.DataModel
         public string NoMotor { get; set; }
         [Required]
         public EstadoVehiculo EstadoVehiculo { get; set; }
-        public int ModeloId { get; set; }
+        public Guid ModeloId { get; set; }
         public virtual Modelo Modelo { get; set; }
-        public int TipoVehiculoId { get; set; }
+        public Guid TipoVehiculoId { get; set; }
         public virtual TipoVehiculo TipoVehiculo { get; set; }
-        public int TipoCombustibleId { get; set; }
+        public Guid TipoCombustibleId { get; set; }
         public virtual TipoCombustible TipoCombustible { get; set; }
 
         public virtual ICollection<Renta> Rentas { get; set; }

@@ -11,7 +11,7 @@ namespace EconRentCar.Logics.Validators
     public class TipoCombustibleValidator : AbstractValidator<TipoCombustible>
     {
         
-        private TipoCombustibleValidator()
+        public TipoCombustibleValidator()
         {
             RuleFor(x => x.Nombre)
                 .NotEmpty()

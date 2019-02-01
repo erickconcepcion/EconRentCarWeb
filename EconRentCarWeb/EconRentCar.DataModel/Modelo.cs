@@ -22,7 +22,7 @@ namespace EconRentCar.DataModel
         [DataType("money")]
         public decimal MontoPorDia { get; set; }
         public bool Activo { get; set; }
-        public int MarcaId { get; set; }
+        public Guid MarcaId { get; set; }
         public virtual Marca Marca { get; set; }
         public virtual ICollection<Vehiculo> Vehiculos { get; set; }
     }

@@ -11,7 +11,7 @@ namespace EconRentCar.Logics.Validators
     public class RentaValidator : AbstractValidator<Renta>
     {
         
-        private RentaValidator()
+        public RentaValidator()
         {
             RuleFor(x => x.Comentario)
                 .NotEmpty()

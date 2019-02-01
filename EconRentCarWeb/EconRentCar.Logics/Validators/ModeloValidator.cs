@@ -10,8 +10,8 @@ namespace EconRentCar.Logics.Validators
 {
     public class ModeloValidator : AbstractValidator<Modelo>
     {
-        
-        private ModeloValidator()
+
+        public ModeloValidator()
         {
             RuleFor(x => x.Nombre)
                 .NotEmpty()

@@ -13,7 +13,7 @@ namespace EconRentCar.Logics.Repositories
 {
     public class EmpleadoRepository : EntityBaseRepository<Empleado>, IEmpleadoRepository
     {
-        private EmpleadoRepository(DbContext db)
+        public EmpleadoRepository(ApplicationDbContext db)
             : base(db)
         {
 

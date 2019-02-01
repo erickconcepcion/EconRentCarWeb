@@ -13,7 +13,7 @@ namespace EconRentCar.Logics.Services
 {
     public class InspeccionService : EntityBaseService<Inspeccion>, IInspeccionService
     {
-        private InspeccionService(IValidator<Inspeccion> val, IInspeccionRepository repo)
+        public InspeccionService(IValidator<Inspeccion> val, IInspeccionRepository repo)
             : base(val, repo)
         {
 

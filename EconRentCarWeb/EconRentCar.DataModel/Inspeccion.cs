@@ -11,7 +11,7 @@ namespace EconRentCar.DataModel
     public class Inspeccion : IEntityBase
     {
         public Guid Id { get; set; }
-        public int RentaId { get; set; }
+        public Guid RentaId { get; set; }
         public virtual Renta Renta { get; set; }
         public bool TieneRayaduras { get; set; }
         public decimal GalonesCombustibles { get; set; }

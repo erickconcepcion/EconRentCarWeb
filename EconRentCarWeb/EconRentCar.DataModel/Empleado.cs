@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,8 @@ namespace EconRentCar.DataModel
         [Required]
         public DateTime FechaIngreso { get; set; }
         public bool Activo { get; set; }
-        public int AppUserId { get; set; }
+        [ForeignKey("AppUsers")]
+        public string AppUserId { get; set; }
         public virtual AppUser AppUsers { get; set; }
         public virtual ICollection<Renta> Rentas { get; set; }
 

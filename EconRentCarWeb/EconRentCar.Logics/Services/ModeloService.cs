@@ -13,7 +13,7 @@ namespace EconRentCar.Logics.Services
 {
     public class ModeloService : EntityBaseService<Modelo>, IModeloService
     {
-        private ModeloService(IValidator<Modelo> val, IModeloRepository repo)
+        public ModeloService(IValidator<Modelo> val, IModeloRepository repo)
             : base(val, repo)
         {
 

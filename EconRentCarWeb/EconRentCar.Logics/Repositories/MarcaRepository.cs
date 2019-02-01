@@ -13,7 +13,7 @@ namespace EconRentCar.Logics.Repositories
 {
     public class MarcaRepository : EntityBaseRepository<Marca>, IMarcaRepository
     {
-        private MarcaRepository(DbContext db)
+        public MarcaRepository(ApplicationDbContext db)
             : base(db)
         {
 

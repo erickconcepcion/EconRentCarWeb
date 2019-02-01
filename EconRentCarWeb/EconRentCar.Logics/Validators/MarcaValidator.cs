@@ -10,8 +10,8 @@ namespace EconRentCar.Logics.Validators
 {
     public class MarcaValidator : AbstractValidator<Marca>
     {
-        
-        private MarcaValidator()
+
+        public MarcaValidator()
         {
             RuleFor(x => x.Nombre)
                 .NotEmpty()

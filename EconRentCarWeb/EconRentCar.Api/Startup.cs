@@ -13,11 +13,27 @@ using Microsoft.EntityFrameworkCore;
 using EconRentCar.DataModel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using EconRentCar.Api.AuthServices;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using EconRentCar.Api.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using EconRentCar.Logics.Repositories;
+using EconRentCar.Api.Extensions;
+using FluentValidation.AspNetCore;
+using FluentValidation;
+using EconRentCar.Logics.Validators;
+using AutoMapper;
+using EconRentCar.Logics.Services;
 
 namespace EconRentCar.Api
 {
     public class Startup
     {
+        private const string SecretKey = "THEKEYISINYOURHEART";
+        private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -38,15 +54,77 @@ namespace EconRentCar.Api
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            services.AddSingleton<IJwtFactory, JwtFactory>();
+
+            services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
+            // Configure JwtIssuerOptions
+            services.Configure<JwtIssuerOptions>(options =>
+            {
+                options.Issuer = AppConstants.Issuer;
+                options.Audience = AppConstants.Audience;
+                options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
+            });
+
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidIssuer = AppConstants.Issuer,
+
+                ValidateAudience = true,
+                ValidAudience = AppConstants.Audience,
+
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = _signingKey,
+
+                RequireExpirationTime = false,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero
+            };
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(configureOptions =>
+            {
+                configureOptions.ClaimsIssuer = AppConstants.Issuer;
+                configureOptions.TokenValidationParameters = tokenValidationParameters;
+                configureOptions.SaveToken = true;
+            });
+
+            // api user claim policy
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ApiUser", policy => policy.RequireClaim(AppConstants.rolClaim, AppConstants.apiAccess));
+            });
+
+            services.AddCors();
+
+            services.AddEntityRepositories();
+
+            services.AddEntityServices();
+
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ContractResolver
+                    = new Newtonsoft.Json.Serialization.DefaultContractResolver();
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)           
+            .AddFluentValidation();
+
+            AssemblyScanner.FindValidatorsInAssemblyContaining<ClienteValidator>()
+               .ForEach(a => services.AddTransient(a.InterfaceType, a.ValidatorType));
+
+            services.AddAutoMapper(map => { map.AddProfile<EconrentCarMappings>(); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider service)
         {
             if (env.IsDevelopment())
             {
@@ -63,15 +141,29 @@ namespace EconRentCar.Api
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
-
+            CreateUserRoles(service).Wait();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+        private async Task CreateUserRoles(IServiceProvider serviceProvider)
+        {
+            var UserManager = serviceProvider.GetRequiredService<UserManager<AppUser>>();
+
+            IdentityResult usersResult;
+            var credential = "super@usuario.com";
+            AppUser user = await UserManager.FindByEmailAsync(credential);
+            if (user == null)
+            {
+                var User = new AppUser() { UserName = credential, Email = credential };
+                usersResult = await UserManager.CreateAsync(User, "Abcd.1234");
+
+            }
         }
     }
 }

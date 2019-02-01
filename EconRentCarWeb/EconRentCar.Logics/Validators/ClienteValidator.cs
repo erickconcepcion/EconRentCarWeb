@@ -11,7 +11,7 @@ namespace EconRentCar.Logics.Validators
     public class ClienteValidator: AbstractValidator<Cliente>
     {
         
-        private ClienteValidator()
+        public ClienteValidator()
         {
             RuleFor(x => x.Nombres)
                 .NotEmpty()

@@ -14,8 +14,8 @@ namespace EconRentCar.Logics.Services
 {
     public class ClienteService : EntityBaseService<Cliente>, IClienteService
     {
-        
-        private ClienteService(IValidator<Cliente> val, IClienteRepository repo)
+
+        public ClienteService(IValidator<Cliente> val, IClienteRepository repo)
             : base(val, repo)
         {
 

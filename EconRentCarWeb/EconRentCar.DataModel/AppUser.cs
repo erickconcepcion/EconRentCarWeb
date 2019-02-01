@@ -11,11 +11,7 @@ namespace EconRentCar.DataModel
 {
     public class AppUser: IdentityUser
     {
-        public AppUser()
-        {
-            Empleados = new HashSet<Empleado>();
-        }        
-        public virtual ICollection<Empleado> Empleados { get; set; }
+        public virtual Empleado Empleado { get; set; }
 
     }
 }

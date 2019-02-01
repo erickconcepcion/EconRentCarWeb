@@ -13,7 +13,7 @@ namespace EconRentCar.Logics.Repositories
 {
     public class InspeccionRepository : EntityBaseRepository<Inspeccion>, IInspeccionRepository
     {
-        private InspeccionRepository(DbContext db)
+        public InspeccionRepository(ApplicationDbContext db)
             : base(db)
         {
 

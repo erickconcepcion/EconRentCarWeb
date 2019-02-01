@@ -13,7 +13,7 @@ namespace EconRentCar.Logics.Services
 {
     public class TipoCombustibleService : EntityBaseService<TipoCombustible>,ITipoCombustibleService
     {
-        private TipoCombustibleService(IValidator<TipoCombustible> val, ITipoCombustibleRepository repo)
+        public TipoCombustibleService(IValidator<TipoCombustible> val, ITipoCombustibleRepository repo)
             : base(val, repo)
         {
 

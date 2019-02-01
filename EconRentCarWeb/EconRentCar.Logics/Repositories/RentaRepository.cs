@@ -13,7 +13,7 @@ namespace EconRentCar.Logics.Repositories
 {
     public class RentaRepository : EntityBaseRepository<Renta>,IRentaRepository
     {
-        private RentaRepository(DbContext db)
+        public RentaRepository(ApplicationDbContext db)
             : base(db)
         {
 

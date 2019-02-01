@@ -13,7 +13,7 @@ namespace EconRentCar.Logics.Services
 {
     public class MarcaService : EntityBaseService<Marca>, IMarcaService
     {
-        private MarcaService(IValidator<Marca> val, IMarcaRepository repo)
+        public MarcaService(IValidator<Marca> val, IMarcaRepository repo)
             : base(val, repo)
         {
 
