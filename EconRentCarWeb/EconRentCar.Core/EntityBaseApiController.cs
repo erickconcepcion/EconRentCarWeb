@@ -59,12 +59,14 @@ namespace EconRentCar.Core
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                ModelState.AddModelError("Exception", e.Message);
+                return BadRequest(ModelState);
             }
             var result = Service.Add(model);
             if (!result.Success)
             {
-                return BadRequest(result.Messages);
+                ModelState.AddErrorFromResult(result.Messages);
+                return BadRequest(ModelState);
             }
             if (!Service.Save())
                 return StatusCode(500, "Something was wrong on server");
@@ -102,13 +104,15 @@ namespace EconRentCar.Core
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                ModelState.AddModelError("Exception", e.Message);
+                return BadRequest(ModelState);
             }
             
             var result = Service.Update(model);
             if (!result.Success)
             {
-                BadRequest(result.Messages);
+                ModelState.AddErrorFromResult(result.Messages);
+                return BadRequest(ModelState);
             }
             if (!Service.Save())
             {
@@ -148,7 +152,8 @@ namespace EconRentCar.Core
             var result = Service.Update(model);
             if (!result.Success)
             {
-                BadRequest(result.Messages);
+                ModelState.AddErrorFromResult(result.Messages);
+                return BadRequest(ModelState);
             }
             if (!Service.Save())
             {

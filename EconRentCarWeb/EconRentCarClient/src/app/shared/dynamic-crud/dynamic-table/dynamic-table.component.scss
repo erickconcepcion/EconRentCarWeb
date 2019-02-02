@@ -1,0 +1,27 @@
+.mattable-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.mattable-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+    
+.table-filter {
+  font-size: 14px;
+  width: 88%;
+  margin-left: 2%;
+}
+  
+.scroll-md {
+  overflow: auto;
+}
+.main-content{
+  padding-bottom: 0px;
+}
+.table-space {
+  padding-left: 8px;
+  padding-right: 8px;
+}

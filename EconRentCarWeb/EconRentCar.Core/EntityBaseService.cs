@@ -66,8 +66,8 @@ namespace EconRentCar.Core
                 Repository.Add(entity);
                 return new EntityActionResult() { ErrorCode = 0, Success = true, Id = entity.Id };
             }
-            var errosMsg = results.Errors.Select(e => e.ErrorMessage);
-            return new EntityActionResult() { ErrorCode = 500, Success = false, Messages = errosMsg };
+            var errosMsg = results.Errors.Select(e => new KeyValuePair<string, string>(e.ErrorCode, e.ErrorMessage));
+            return new EntityActionResult() { ErrorCode = 500, Success = false, Messages = errosMsg as Dictionary<string, string> };
         }
 
         public virtual EntityActionResult Update(T entity)
@@ -78,8 +78,8 @@ namespace EconRentCar.Core
                 Repository.Update(entity);
                 return new EntityActionResult() { ErrorCode = 0, Success = true, Id = entity.Id };
             }
-            var errosMsg = results.Errors.Select(e => e.ErrorMessage);
-            return new EntityActionResult() { ErrorCode = 500, Success = false, Messages = errosMsg };
+            var errosMsg = results.Errors.Select(e => new KeyValuePair<string, string>(e.ErrorCode, e.ErrorMessage));
+            return new EntityActionResult() { ErrorCode = 500, Success = false, Messages = errosMsg as Dictionary<string, string> };
         }
 
         public virtual EntityActionResult Remove(T entity)
@@ -124,8 +124,8 @@ namespace EconRentCar.Core
                 }
                 else
                 {
-                    var errosMsg = result.Errors.Select(e => e.ErrorMessage);
-                    results.Add(new EntityActionResult() { ErrorCode = 500, Success = false, Messages = errosMsg });
+                    var errosMsg = result.Errors.Select(e => new KeyValuePair<string, string>(e.ErrorCode, e.ErrorMessage));
+                    results.Add(new EntityActionResult() { ErrorCode = 500, Success = false, Messages = errosMsg as Dictionary<string, string> });
                 }                
             }
             return results;

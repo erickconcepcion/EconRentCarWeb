@@ -7,7 +7,7 @@ namespace EconRentCar.Core
     {
         int ErrorCode { get; set; }
         bool Success { get; set; }
-        IEnumerable<string> Messages { get; set; }
+        IDictionary<string, string> Messages { get; set; }
         Guid Id { get; set; }
     }
 }

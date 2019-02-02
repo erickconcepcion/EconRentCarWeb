@@ -1,0 +1,53 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.center {
+    margin: 10px auto;
+  }
+  .mat-dialog-container {
+    padding-top: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    font-family: 'Roboto', sans-serif;
+  }
+  .mat-dialog-padding {
+    padding-top: 24px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+  ::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #c3c3c3;
+    border: 0px none #ffffff;
+    border-radius: 0px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d2d2d2;
+  }
+  ::-webkit-scrollbar-thumb:active {
+    background: #b2b2b2;
+  }
+  ::-webkit-scrollbar-track {
+    background: #e4e4e4;
+    border: 0px none #ffffff;
+    border-radius: 0px;
+  }
+  ::-webkit-scrollbar-track:hover {
+    background: #ffffff;
+  }
+  ::-webkit-scrollbar-track:active {
+    background: #ffffff;
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+  

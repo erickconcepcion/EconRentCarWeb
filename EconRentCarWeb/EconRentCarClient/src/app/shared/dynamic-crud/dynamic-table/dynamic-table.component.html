@@ -1,0 +1,38 @@
+<div class="mattable-container mat-elevation-z8 table-space">
+  <div class="mattable-header">
+    <mat-form-field *ngIf="canFilter" class="table-filter">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar" [(ngModel)]="filter" name="filter">
+    </mat-form-field>
+    <button *ngIf="canAdd" color="primary" mat-icon-button class="like" (click)="openAddDialog(TableModel.InterfaceConfig.AddTitle)" matTooltip="Agragar" [matTooltipPosition]="'left'">
+      <i class=" material-icons">add_to_queue</i>
+    </button>
+    <mat-progress-bar *ngIf="inTrafic" mode="indeterminate"></mat-progress-bar>
+  </div>
+  <div class="scroll-md">
+    <mat-table #table [dataSource]="dataSource" matSort>
+      <ng-container *ngFor="let col of keys" cdkColumnDef={{col}}>
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> {{ TableModel.InterfaceConfig.definition[col] }}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row"> {{byLiteral(row, col)}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Actions">
+        <mat-header-cell *matHeaderCellDef> {{actionDefinition[TableModel.InterfaceConfig.actionDefinitionKey]}} </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button *ngIf="canView" (click)="viewData(element)" mat-icon-button color="accent" class="like" matTooltip="Visualizar" [matTooltipPosition]="'left'">
+            <i class="material-icons">dvr</i>
+          </button>
+          <button *ngIf="canEdit" (click)="openEditDialog(TableModel.InterfaceConfig.EditTitle, element)" mat-icon-button color="primary" class="edit"
+            matTooltip="Editar" [matTooltipPosition]="'left'">
+            <i class="material-icons">edit</i>
+          </button>
+          <button *ngIf="canRemove" mat-icon-button color="warn" (click)="deleteData(element)" class="remove" matTooltip="Eliminar" [matTooltipPosition]="'left'">
+            <i class="material-icons">close</i>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+  </div>
+</div>

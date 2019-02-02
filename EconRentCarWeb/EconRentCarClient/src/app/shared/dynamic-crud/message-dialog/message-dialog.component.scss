@@ -1,0 +1,29 @@
+div.message {
+  font-weight: bold;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 0px;
+}
+div.info {
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  font-size: 12pt;
+}
+.icon-container {
+  display: flex;
+  flex-direction: row;
+}
+.icon-item {
+  flex-grow: 1;
+  padding-top: 10px;
+  padding-left: 10px;  
+}
+.icon-item i {
+  text-align: center;
+  font-size: 70px;
+}
+.description-item {
+  flex-grow: 3;
+}

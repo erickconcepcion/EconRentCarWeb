@@ -1,4 +1,5 @@
 ﻿using LinqKit;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,13 @@ namespace EconRentCar.Core
     public static class Extension
     {
         
+        public static void AddErrorFromResult(this ModelStateDictionary modelState, IDictionary<string, string> errors)
+        {
+            foreach (var item in errors)
+            {
+                modelState.AddModelError(item.Key, item.Value);
+            }
+        }
 
         public static string ToPascalCase(this string str)
         {

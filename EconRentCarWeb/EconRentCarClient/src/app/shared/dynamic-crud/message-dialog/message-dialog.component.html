@@ -1,0 +1,26 @@
+<div mat-dialog-container class="message-dialog">
+  <mat-toolbar color="{{toolbarColor}}" class="mat-elevation-z2">
+    <mat-card-header>{{params.Caption}}</mat-card-header>
+  </mat-toolbar>
+  <div [ngClass]="{'icon-container': hasIcon}">
+    <div *ngIf="hasIcon" class="icon-item" color="warn">
+      <i class="material-icons">highlight_off</i>
+    </div>
+    <div [ngClass]="{'description-item': hasIcon}">
+      <div class="message">
+        <p>
+          {{params.Title}}
+        </p>
+      </div>
+      <div *ngIf="hasMessage" class="info">
+        <p>{{params.Message}}</p>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions style="padding: 5px;float:right">
+    <button *ngIf="showOk" mat-button color="primary" cdkFocusInitial (click)="onOk()">Ok</button>
+    <button *ngIf="showCancel" mat-button color="warn" (click)="onCancel()">Cancel</button>
+    <button *ngIf="showYes" mat-button color="primary" cdkFocusInitial (click)="onYes()">Yes</button>
+    <button *ngIf="showNo" mat-button color="warn" (click)="onNo()">No</button>
+  </div>
+</div>
