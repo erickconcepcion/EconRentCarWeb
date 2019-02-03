@@ -15,30 +15,31 @@ namespace EconRentCar.Logics.Validators
         {
             RuleFor(x => x.Comentario)
                 .NotEmpty()
-                .WithMessage("{PropertyName} es requerido.");
+                .WithMessage(CommonValidatorMessages.NotEmpty);
             RuleFor(p => p.Comentario)
                 .MaximumLength(30)
+                .WithMessage(CommonValidatorMessages.Max)
                 .MinimumLength(2)
-                .WithMessage("{PropertyName} solo de {MinLength} a {MaxLength} Caracteres Permitidos.");
+                .WithMessage(CommonValidatorMessages.Min);
             RuleFor(x => x.EstadoRenta)
                .NotEmpty()
-               .WithMessage("{PropertyName} es requerido.");
+               .WithMessage(CommonValidatorMessages.NotEmpty);
             RuleFor(p => p.EstadoRenta)
                 .IsInEnum()
-                .WithMessage("{PropertyName} No tiene un valor valido.");
+                .WithMessage(CommonValidatorMessages.MissMatch);
 
             RuleFor(x => x.FechaRenta)
                 .NotEmpty()
-                .WithMessage("{PropertyName} es requerido.");
+                .WithMessage(CommonValidatorMessages.NotEmpty);
             RuleFor(p => p.FechaRenta)
                 .LessThanOrEqualTo(p=>p.FechaDevolucion)
-                .WithMessage("{PropertyName} No tiene un valor valido.");
+                .WithMessage(CommonValidatorMessages.MissMatch);
             RuleFor(x => x.FechaDevolucion)
                 .NotEmpty()
-                .WithMessage("{PropertyName} es requerido.");
+                .WithMessage(CommonValidatorMessages.NotEmpty);
             RuleFor(p => p.FechaRenta)
                 .GreaterThanOrEqualTo(p => p.FechaRenta)
-                .WithMessage("{PropertyName} No tiene un valor valido.");
+                .WithMessage(CommonValidatorMessages.MissMatch);
         }
     }
 }

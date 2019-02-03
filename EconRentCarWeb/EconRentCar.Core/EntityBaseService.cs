@@ -67,7 +67,7 @@ namespace EconRentCar.Core
                 return new EntityActionResult() { ErrorCode = 0, Success = true, Id = entity.Id };
             }
             var errosMsg = results.Errors.Select(e => new KeyValuePair<string, string>(e.ErrorCode, e.ErrorMessage));
-            return new EntityActionResult() { ErrorCode = 500, Success = false, Messages = errosMsg as Dictionary<string, string> };
+            return new EntityActionResult() { ErrorCode = 500, Success = false, Messages = errosMsg };
         }
 
         public virtual EntityActionResult Update(T entity)

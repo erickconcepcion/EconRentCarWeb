@@ -15,47 +15,46 @@ namespace EconRentCar.Logics.Validators
         {
             RuleFor(x => x.Nombres)
                 .NotEmpty()
-                .WithMessage("{PropertyName} es requerido.");
-            RuleFor(p => p.Nombres)
-                .MaximumLength(30)
+                .WithMessage(CommonValidatorMessages.NotEmpty)
                 .MinimumLength(2)
-                .WithMessage("{PropertyName} solo de {MinLength} a {MaxLength} Caracteres Permitidos.");
-
-            RuleFor(x => x.Apellidos)
-                .NotEmpty()
-                .WithMessage("{PropertyName} es requerido.");
-            RuleFor(p => p.Apellidos)
+                .WithMessage(CommonValidatorMessages.Min)
                 .MaximumLength(30)
-                .MinimumLength(3)
-                .WithMessage("{PropertyName} solo de {MinLength} a {MaxLength} Caracteres Permitidos.");
+                .WithMessage(CommonValidatorMessages.Max);
+            RuleFor(x => x.Apellidos)
+            .NotEmpty()
+                .WithMessage(CommonValidatorMessages.NotEmpty)
+                .MinimumLength(2)
+                .WithMessage(CommonValidatorMessages.Min)
+                .MaximumLength(30)
+                .WithMessage(CommonValidatorMessages.Max);
 
-            RuleFor(x => x.CedulaCliente)
+             RuleFor(p => p.CedulaCliente)
                 .NotEmpty()
-                .WithMessage("{PropertyName} es requerido.");
-            RuleFor(p => p.CedulaCliente)
-                .MaximumLength(13)
+                .WithMessage(CommonValidatorMessages.NotEmpty)
                 .MinimumLength(13)
-                .WithMessage("{PropertyName} solo de {MinLength} a {MaxLength} Caracteres Permitidos.");
-            RuleFor(p => p.CedulaCliente)
+                .WithMessage(CommonValidatorMessages.Min)
+                .MaximumLength(13)
+                .WithMessage(CommonValidatorMessages.Max)
                 .Matches(@"\d{3}-\d{7}-\d{1}")
-                .WithMessage("{PropertyName} No posee un valor valido.");
+                .WithMessage(CommonValidatorMessages.MissMatch);
+
             RuleFor(x => x.NoTArjetaCredito)
                 .NotEmpty()
-                .WithMessage("{PropertyName} es requerido.");
-            RuleFor(p => p.NoTArjetaCredito)
-                .MaximumLength(19)
+                .WithMessage(CommonValidatorMessages.NotEmpty)
                 .MinimumLength(19)
-                .WithMessage("{PropertyName} solo de {MinLength} a {MaxLength} Caracteres Permitidos.");
-            RuleFor(p => p.NoTArjetaCredito)
+                .WithMessage(CommonValidatorMessages.Min)
+                .MaximumLength(19)
+                .WithMessage(CommonValidatorMessages.Max)
+                .Matches(@"\d{3}-\d{7}-\d{1}")
+                .WithMessage(CommonValidatorMessages.MissMatch)           
                 .Matches(@"\d{4}-\d{4}-\d{4}-\d{4}")
-                .WithMessage("{PropertyName} No posee un valor valido.");
+                .WithMessage(CommonValidatorMessages.MissMatch);
 
             RuleFor(x => x.TipoPersona)
                 .NotEmpty()
-                .WithMessage("{PropertyName} es requerido.");
-            RuleFor(p => p.TipoPersona)
+                .WithMessage(CommonValidatorMessages.NotEmpty)
                 .IsInEnum()
-                .WithMessage("{PropertyName} No tiene un valor valido.");
+                .WithMessage(CommonValidatorMessages.MissMatch);
 
 
         }

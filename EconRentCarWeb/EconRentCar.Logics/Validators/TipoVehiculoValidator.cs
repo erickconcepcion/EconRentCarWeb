@@ -15,18 +15,21 @@ namespace EconRentCar.Logics.Validators
         {
             RuleFor(x => x.Nombre)
                 .NotEmpty()
-                .WithMessage("{PropertyName} es requerido.");
+                .WithMessage(CommonValidatorMessages.NotEmpty);
             RuleFor(p => p.Nombre)
                 .MaximumLength(50)
+                .WithMessage(CommonValidatorMessages.Max)
                 .MinimumLength(2)
-                .WithMessage("{PropertyName} solo de {MinLength} a {MaxLength} Caracteres Permitidos.");
+
+                .WithMessage(CommonValidatorMessages.Min);
             RuleFor(x => x.Descripcion)
                 .NotEmpty()
-                .WithMessage("{PropertyName} es requerido.");
+                .WithMessage(CommonValidatorMessages.NotEmpty);
             RuleFor(p => p.Descripcion)
                 .MaximumLength(50)
+                .WithMessage(CommonValidatorMessages.Max)
                 .MinimumLength(2)
-                .WithMessage("{PropertyName} solo de {MinLength} a {MaxLength} Caracteres Permitidos.");
+                .WithMessage(CommonValidatorMessages.Min);
 
         }
     }

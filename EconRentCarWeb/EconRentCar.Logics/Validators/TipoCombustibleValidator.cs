@@ -13,13 +13,13 @@ namespace EconRentCar.Logics.Validators
         
         public TipoCombustibleValidator()
         {
-            RuleFor(x => x.Nombre)
-                .NotEmpty()
-                .WithMessage("{PropertyName} es requerido.");
             RuleFor(p => p.Nombre)
-                .MaximumLength(50)
+                .NotEmpty()
+                .WithMessage(CommonValidatorMessages.NotEmpty)
                 .MinimumLength(2)
-                .WithMessage("{PropertyName} solo de {MinLength} a {MaxLength} Caracteres Permitidos.");
+                .WithMessage(CommonValidatorMessages.Min)
+                .MaximumLength(50)
+                .WithMessage(CommonValidatorMessages.Max);
 
         }
     }

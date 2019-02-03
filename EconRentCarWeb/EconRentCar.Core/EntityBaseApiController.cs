@@ -69,8 +69,10 @@ namespace EconRentCar.Core
                 return BadRequest(ModelState);
             }
             if (!Service.Save())
-                return StatusCode(500, "Something was wrong on server");
-
+            {
+                ModelState.AddModelError("NotSave", "Something was wrong on server while saving");
+                return StatusCode(500, ModelState);
+            }
 
             return Created(Request.Path + "/" + model.Id, model);
         }
@@ -116,7 +118,8 @@ namespace EconRentCar.Core
             }
             if (!Service.Save())
             {
-                return StatusCode(500, "Something was wrong on server");
+                ModelState.AddModelError("NotSave", "Something was wrong on server while saving");
+                return StatusCode(500, ModelState);
             }
             return NoContent();
 
@@ -157,7 +160,8 @@ namespace EconRentCar.Core
             }
             if (!Service.Save())
             {
-                return StatusCode(500, "Something was wrong on server");
+                ModelState.AddModelError("NotSave", "Something was wrong on server while saving");
+                return StatusCode(500, ModelState);
             }
 
             return NoContent();
@@ -177,7 +181,8 @@ namespace EconRentCar.Core
             
             if (!Service.Save())
             {
-                return StatusCode(500, "Something was wrong on server");
+                ModelState.AddModelError("NotSave", "Something was wrong on server while saving");
+                return StatusCode(500, ModelState);
             }
 
             return NoContent();

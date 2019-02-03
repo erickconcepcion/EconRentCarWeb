@@ -14,7 +14,7 @@ namespace EconRentCar.Core
     public static class Extension
     {
         
-        public static void AddErrorFromResult(this ModelStateDictionary modelState, IDictionary<string, string> errors)
+        public static void AddErrorFromResult(this ModelStateDictionary modelState, IEnumerable<KeyValuePair<string, string>> errors)
         {
             foreach (var item in errors)
             {

@@ -15,10 +15,10 @@ namespace EconRentCar.Logics.Validators
         {
             RuleFor(x => x.FechaInspeccion)
                 .NotEmpty()
-                .WithMessage("{PropertyName} es requerido.");
+                .WithMessage(CommonValidatorMessages.NotEmpty);
             RuleFor(p => p.FechaInspeccion)
                 .GreaterThanOrEqualTo(DateTime.Today)
-                .WithMessage("{PropertyName} No tiene un valor valido.");
+                .WithMessage(CommonValidatorMessages.MissMatch);
         }
     }
 }
