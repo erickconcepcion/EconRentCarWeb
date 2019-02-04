@@ -1,4 +1,5 @@
 export class Endpoints {
+    public Auth = 'Auth';
     public Clientes = 'Clientes';
     public Empleados = 'Empleados';
     public Inspecciones = 'Inspecciones';

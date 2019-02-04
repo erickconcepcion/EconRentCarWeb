@@ -33,7 +33,7 @@ namespace EconRentCar.DataModel
         public bool Activo { get; set; }
         [ForeignKey("AppUsers")]
         public string AppUserId { get; set; }
-        public virtual AppUser AppUsers { get; set; }
+        public virtual AppUser AppUser { get; set; }
         public virtual ICollection<Renta> Rentas { get; set; }
 
     }

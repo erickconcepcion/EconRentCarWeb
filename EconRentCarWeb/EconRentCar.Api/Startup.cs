@@ -154,14 +154,32 @@ namespace EconRentCar.Api
         private async Task CreateUserRoles(IServiceProvider serviceProvider)
         {
             var UserManager = serviceProvider.GetRequiredService<UserManager<AppUser>>();
+            var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
 
             IdentityResult usersResult;
             var credential = "super@usuario.com";
             AppUser user = await UserManager.FindByEmailAsync(credential);
+            
             if (user == null)
             {
                 var User = new AppUser() { UserName = credential, Email = credential };
                 usersResult = await UserManager.CreateAsync(User, "Abcd.1234");
+                var emp = context.Empleados.Where(e => e.AppUserId==User.Id).FirstOrDefault();
+                if (emp == null)
+                {
+                    emp = new Empleado
+                    {
+                        Nombres = "Super",
+                        Apellidos = "Usuario",
+                        TandaLaboral = Common.TandaLaboral.Matutino,
+                        CedulaEmpleado = "000",
+                        PorcentajeComision = 0.00m,
+                        FechaIngreso = DateTime.Now,
+                        AppUserId = User.Id
+                    };
+                    context.Empleados.Add(emp);
+                    await context.SaveChangesAsync();
+                }
 
             }
         }

@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
 using EconRentCar.Api.AuthServices;
 using EconRentCar.Api.Helpers;
 using EconRentCar.Api.Models;
 using EconRentCar.DataModel;
+using EconRentCar.Logics.Services;
+using EconRentCar.Logics.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -25,16 +28,22 @@ namespace EconRentCar.Api.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IJwtFactory _jwtFactory;
         private readonly JwtIssuerOptions _jwtOptions;
+        private readonly IEmpleadoService _empService;
+        private readonly IMapper _mapper;
         public AuthController(
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
             IJwtFactory jwtFactory,
-            IOptions<JwtIssuerOptions> jwtOptions)
+            IOptions<JwtIssuerOptions> jwtOptions,
+            IEmpleadoService empService,
+            IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _jwtFactory = jwtFactory;
             _jwtOptions = jwtOptions.Value;
+            _empService = empService;
+            _mapper = mapper;
         }
 
         [HttpPost]
@@ -54,9 +63,13 @@ namespace EconRentCar.Api.Controllers
                 return BadRequest(ModelState);
             }
             var user = await _userManager.FindByIdAsync(identity.Claims.Single(c => c.Type == "id").Value);
-
+            var emp = _mapper.Map<EmpleadoRefVm>(_empService.FindBy(e => e.AppUserId == user.Id).FirstOrDefault());
             var jwt = await Tokens.GenerateJwt(identity, _jwtFactory, credentials.Email, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented },
-                new { user.Email, user.Empleado});
+                new {
+                    user.Email,
+                    user.UserName,
+                    Empleado = emp
+                });
 
             return new OkObjectResult(jwt);
         }
