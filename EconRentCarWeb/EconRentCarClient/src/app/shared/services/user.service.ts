@@ -56,5 +56,11 @@ export class UserService extends BaseService {
   isLoggedIn() {
     return this.loggedIn;
   }
+  getToken() {
+    return this.isLoggedIn() ? localStorage.getItem('auth_token') : null;
+  }
+  getUserInfo() {
+    return this.isLoggedIn() ? JSON.parse(localStorage.getItem('user_info')) as IUser : null;
+  }
 
 }
