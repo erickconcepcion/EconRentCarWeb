@@ -27,6 +27,7 @@ namespace EconRentCar.Api.Extensions
         public static IServiceCollection AddEntityServices(this IServiceCollection services)
         {
             services.AddScoped<IClienteService, ClienteService>();
+
             services.AddScoped<IEmpleadoService, EmpleadoService>();
             services.AddScoped<IInspeccionService, InspeccionService>();
             services.AddScoped<IMarcaService, MarcaService>();

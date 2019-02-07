@@ -1,36 +1,32 @@
 import { Observable } from 'rxjs';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpErrorResponse, HttpClient } from '@angular/common/http';
+import { BaseData, BaseSecureHttpService } from '../dynamic-crud/models';
+import { ConfigService } from '../utils/config.service';
+import { map } from 'rxjs/operators';
 
 
-export abstract class BaseService {
-    protected Header: HttpHeaders;
-    constructor() {
-        this.Header = new HttpHeaders();
-        this.Header.append('Content-Type', 'application/json');
-    }
+export abstract class BaseService<T extends BaseData> implements BaseSecureHttpService<T> {
+  private baseUrl: string;
+  constructor(private http: HttpClient, private configService: ConfigService, url: string) {
+    this.baseUrl = `${configService.getApiUri()}/${url}`;
+  }
 
-    protected handleError(error: any) {
-    const applicationError = error.headers.get('Application-Error');
-    console.log(error, applicationError);
-    // either applicationError in header or model error in body
-    if (applicationError) {
-      return Observable.throw(applicationError);
-    }
+  public GetAll(): Observable<T[]> {
+    return this.http.get<T[]>(`${this.baseUrl}`);
+  }
+  public Get(data: T): Observable<T> {
+    return this.http.get<T>(`${this.baseUrl}/${data.Id}`);
+  }
 
-    let modelStateErrors = '';
-    const serverError = error;
+  public Post(data: T): Observable<T> {
+    return this.http.post<T>(`${this.baseUrl}`, data);
+  }
 
-    if (!serverError.type) {
-      for (const key in serverError) {
-        if (serverError[key]) {
-            modelStateErrors += serverError[key] + '\n';
-        }
-      }
-    }
-    modelStateErrors = modelStateErrors = '' ? null : modelStateErrors;
-    if (error.status === 401 || error.status === 403) {
-      modelStateErrors = 'Sesion Expirada, acceda nuevamente';
-    }
-    return Observable.throw(modelStateErrors || 'Error de comunicacion, consulte a soporte');
+  public Put(data: T): Observable<number> {
+    return this.http.put(`${this.baseUrl}/${data.Id}`, data).pipe(map(res => 204));
+  }
+
+  public Delete(data: T): Observable<number> {
+    return this.http.delete(`${this.baseUrl}/${data.Id}`).pipe(map(res => 204));
   }
 }

@@ -5,7 +5,7 @@ import { Endpoints } from '../models/config-models';
   providedIn: 'root'
 })
 export class ConfigService {
-  _apiUri = 'https://localhost:5001/api/';
+  _apiUri = '/api/';
   constructor() { }
   getApiUri() {
     return this._apiUri;

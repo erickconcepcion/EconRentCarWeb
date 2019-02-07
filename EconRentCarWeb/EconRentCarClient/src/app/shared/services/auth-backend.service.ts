@@ -11,11 +11,17 @@ export class AuthBackendService implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // add authorization header with jwt token if available
+    request = request.clone({
+      setHeaders: {
+        'Content-Type':  'application/json'
+      }
+    });
     const token = this.userService.getToken();
     if (token) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
+          'Content-Type':  'application/json'
         }
       });
     }
