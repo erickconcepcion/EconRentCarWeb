@@ -1,39 +1,11 @@
-body{
-    font-family: 'Roboto', sans-serif;
-    margin:0px !important;
+
+     .grid-con {
+        background: #000;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
     }
-     
- 
-    .login-container{
-    width: 100%;
-      height:400px;
-      padding: 0% !important;
-    background-color: #fff;
-    -webkit-box-shadow: 2px 4px 58px -20px rgba(0,0,0,1);
-    -moz-box-shadow: 2px 4px 58px -20px rgba(0,0,0,1);
-    box-shadow: 2px 4px 58px -20px rgba(0,0,0,1);
-    margin-top: 50px;
-    padding-bottom: 50px !important;
-    }
-     
-    .login-box-header{
-    width: auto;
-        height: 20%;
-        background-color: #e0e0e0;
-        text-align: center;
-        vertical-align: middle;
-        font-size: 3em;
-        padding: 2%;
-        color: #fff;
-    }
-     
-    .login-box-body{
-    width: auto;
-    height:100%;
-    padding: 5% 5% 5% 5%;
-    color: #505050;
-    }
-     
     .login-icon{
     margin-top: -2px;
     }
@@ -48,12 +20,10 @@ body{
     padding:1.5% !important;
         font-size: 1.5em;
     }
-.grid-con {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-}
+    .login-input{
+        font-size: 1.1em;
+    }
+
 .login-con {
     display: flex; 
     flex-direction: row;
@@ -62,5 +32,25 @@ body{
     flex-grow: 1;
 }
 .center-con {
-    flex-grow: 2;
+    flex-grow: 6;
 }
+@media only screen and (min-width: 600px) {
+    mat-form-field {
+        font-size: large;
+    }
+}
+@media only screen and (min-width: 880px) {
+    mat-form-field {
+        font-size: x-large;
+    }
+}
+@media only screen and (min-width: 1800px) {
+    mat-form-field {
+        font-size: xx-large;
+    }
+}
+
+
+/*mat-form-field {
+    font-size: x-large;
+}*/

@@ -39,7 +39,7 @@ import {
   import { CdkTableModule } from '@angular/cdk/table';
 
   @NgModule({
-    exports: [
+    imports: [
       MatAutocompleteModule,
       MatButtonModule,
       MatButtonToggleModule,
@@ -72,6 +72,40 @@ import {
       MatToolbarModule,
       MatTooltipModule,
       CdkTableModule
+    ],
+    exports: [
+      MatAutocompleteModule,
+      MatButtonModule,
+      MatButtonToggleModule,
+      MatCardModule,
+      MatCheckboxModule,
+      MatChipsModule,
+      MatStepperModule,
+      MatDatepickerModule,
+      MatDialogModule,
+      MatExpansionModule,
+      MatGridListModule,
+      MatIconModule,
+      MatInputModule,
+      MatListModule,
+      MatMenuModule,
+      MatNativeDateModule,
+      MatPaginatorModule,
+      MatProgressBarModule,
+      MatProgressSpinnerModule,
+      MatRadioModule,
+      MatRippleModule,
+      MatSelectModule,
+      MatSidenavModule,
+      MatSliderModule,
+      MatSlideToggleModule,
+      MatSnackBarModule,
+      MatSortModule,
+      MatTableModule,
+      MatTabsModule,
+      MatToolbarModule,
+      MatTooltipModule,
+      CdkTableModule,
     ]
   })
   export class MaterialModule { }

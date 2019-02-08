@@ -1,48 +1,46 @@
-<div class="grid-con login-con">
-  <div class="lateral"></div>
-  <div class="login-element center-con">
-    <div class="login-container">
-      <div class="login-box-header">
-        <h1>EconRentCar</h1>
-      </div>
-      <div class="login-box-body">
-        <!--Form-->
+<div class="grid-con">
+  <div class="login-con" style="margin-top: 100px">
+    <div class="lateral"></div>
+    <mat-card class="center-con">
+      <mat-card-header>
+        <mat-card-title>Log In</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
         <form [formGroup]="login" (ngSubmit)="onLogin()">
-        <mat-grid-list cols="9" rowHeight="75px">
-          <mat-grid-tile [rowspan]="1" class="login-icon">
-            <mat-icon>lock</mat-icon>
-          </mat-grid-tile>
-          <mat-grid-tile [colspan]="7">
-            <mat-form-field class="justifier">
-              <input matInput placeholder="Username" type="text" id="email" formControlName="email"
-              pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-              <mat-hint>Ej: fulano@detal.com</mat-hint>
-              <mat-error *ngIf="isFieldValid(login, 'email')">
-                Campo Cuenta es requerido y debe ser como fulano@detal.com.
-              </mat-error>
-            </mat-form-field>
-          </mat-grid-tile>
-        </mat-grid-list>
-        <mat-grid-list cols="9" rowHeight="100px">
-          <mat-grid-tile [rowspan]="1" class="login-icon">
-            <mat-icon>remove_red_eye</mat-icon>
-          </mat-grid-tile>
-          <mat-grid-tile [colspan]="7">
-            <mat-form-field class="justifier">
-              <input matInput placeholder="Password" type="password" formControlName="password">
-              <mat-error *ngIf="isFieldValid(login, 'password')">
-                Esta Contraseña no es válida.
-              </mat-error>
-            </mat-form-field>
-          </mat-grid-tile>
-        </mat-grid-list>
-        <button mat-raised-button class="login-button" [disabled]="!login.valid || isRequesting">
-          <mat-icon>input</mat-icon> Login
-        </button>
-      </form>
-      <mat-progress-bar *ngIf="isRequesting" mode="indeterminate"></mat-progress-bar>
-      </div>
-    </div>
+          <mat-grid-list cols="9" rowHeight="120px">
+            <mat-grid-tile [rowspan]="1" class="login-icon">
+              <mat-icon>lock</mat-icon>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="7">
+              <mat-form-field class="justifier">
+                <input matInput placeholder="Username" type="text" id="email" formControlName="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                <mat-hint>Ej: fulano@detal.com</mat-hint>
+                <mat-error *ngIf="isFieldValid(login, 'email')">
+                  Campo Cuenta es requerido y debe ser como fulano@detal.com.
+                </mat-error>
+              </mat-form-field>
+            </mat-grid-tile>
+          </mat-grid-list>
+          <mat-grid-list cols="9" rowHeight="120px">
+            <mat-grid-tile [rowspan]="1" class="login-icon">
+              <mat-icon>remove_red_eye</mat-icon>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="7">
+              <mat-form-field class="justifier">
+                <input matInput placeholder="Password" type="password" formControlName="password">
+                <mat-error *ngIf="isFieldValid(login, 'password')">
+                  Esta Contraseña no es válida.
+                </mat-error>
+              </mat-form-field>
+            </mat-grid-tile>
+          </mat-grid-list>
+          <button mat-raised-button class="login-button" [disabled]="!login.valid || isRequesting">
+            <mat-icon>input</mat-icon> Login
+          </button>
+        </form>
+        <mat-progress-bar *ngIf="isRequesting" mode="indeterminate"></mat-progress-bar>
+      </mat-card-content>
+    </mat-card>
+    <div class="lateral"></div>
   </div>
-  <div class="lateral"></div>
 </div>
