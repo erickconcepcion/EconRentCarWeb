@@ -14,28 +14,50 @@ import { ErrorInterceptorService } from './shared/services/error-interceptor.ser
 import { InternalComponent } from './internal/internal.component';
 import { ExternalComponent } from './external/external.component';
 import { HomeComponent } from './home/home.component';
+import { ShowTableComponent } from './show-table/show-table.component';
+import { ClienteComponent } from './cliente/cliente.component';
+import { EmpleadoComponent } from './empleado/empleado.component';
+import { InspeccionComponent } from './inspeccion/inspeccion.component';
+import { MarcaComponent } from './marca/marca.component';
+import { ModeloComponent } from './modelo/modelo.component';
+import { RentaComponent } from './renta/renta.component';
+import { TipoCombustibleComponent } from './tipo-combustible/tipo-combustible.component';
+import { TipoVehiculoComponent } from './tipo-vehiculo/tipo-vehiculo.component';
+import { VehiculoComponent } from './vehiculo/vehiculo.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavBarComponent,
-    InternalComponent,
-    ExternalComponent,
-    HomeComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    LayoutModule,
-    MaterialModule,
-    DynamicCrudModule,
-    HttpClientModule
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthBackendService, multi: true },
-      { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true },
-  ],
-  bootstrap: [AppComponent]
+   declarations: [
+      AppComponent,
+      NavBarComponent,
+      InternalComponent,
+      ExternalComponent,
+      HomeComponent,
+      ShowTableComponent,
+      ClienteComponent,
+      EmpleadoComponent,
+      InspeccionComponent,
+      MarcaComponent,
+      ModeloComponent,
+      RentaComponent,
+      TipoCombustibleComponent,
+      TipoVehiculoComponent,
+      VehiculoComponent
+   ],
+   imports: [
+      BrowserModule,
+      AppRoutingModule,
+      BrowserAnimationsModule,
+      LayoutModule,
+      MaterialModule,
+      DynamicCrudModule,
+      HttpClientModule
+   ],
+   bootstrap: [
+      AppComponent
+   ],
+   providers: [
+      { provide: HTTP_INTERCEPTORS, useClass: AuthBackendService, multi: true },
+      { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true }
+   ]
 })
 export class AppModule { }

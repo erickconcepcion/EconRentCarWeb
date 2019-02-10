@@ -10,14 +10,15 @@ export interface FormService<T> {
 
 export interface BaseSecureHttpService<T> {
     GetAll(): Observable<T[]>;
-    Get(data: T): Observable<T>;
+    Get(id: string | number): Observable<T>;
     Post(data: T): Observable<T>;
-    Put(data: T): Observable<number>;
-    Delete(data: T): Observable<number>;
+    Put(id: string | number, data: T): Observable<number>;
+    Delete(id: string | number): Observable<number>;
 }
 
 export interface BaseData {
-    Id: string;
+    Id?: string;
+    id?: string;
 }
 export interface Definition {
     [key: string]: string;

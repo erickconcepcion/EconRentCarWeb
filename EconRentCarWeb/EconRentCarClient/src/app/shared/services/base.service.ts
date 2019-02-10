@@ -14,19 +14,19 @@ export abstract class BaseService<T extends BaseData> implements BaseSecureHttpS
   public GetAll(): Observable<T[]> {
     return this.http.get<T[]>(`${this.baseUrl}`);
   }
-  public Get(data: T): Observable<T> {
-    return this.http.get<T>(`${this.baseUrl}/${data.Id}`);
+  public Get(id: string | number): Observable<T> {
+    return this.http.get<T>(`${this.baseUrl}/${id}`);
   }
 
   public Post(data: T): Observable<T> {
     return this.http.post<T>(`${this.baseUrl}`, data);
   }
 
-  public Put(data: T): Observable<number> {
-    return this.http.put(`${this.baseUrl}/${data.Id}`, data).pipe(map(res => 204));
+  public Put(id: string | number, data: T): Observable<number> {
+    return this.http.put(`${this.baseUrl}/${id}`, data).pipe(map(res => 204));
   }
 
-  public Delete(data: T): Observable<number> {
-    return this.http.delete(`${this.baseUrl}/${data.Id}`).pipe(map(res => 204));
+  public Delete(id: string | number): Observable<number> {
+    return this.http.delete(`${this.baseUrl}/${id}`).pipe(map(res => 204));
   }
 }
