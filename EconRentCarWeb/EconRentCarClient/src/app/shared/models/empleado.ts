@@ -1,26 +1,15 @@
 import { BaseData } from '../dynamic-crud/models';
+import { TandaLaboral } from './enums';
+import { Renta } from './renta';
 
 export class Empleado implements BaseData {
     public Id = '00000000-0000-0000-0000-000000000000';
+    public Nombres = '';
+    public Apellidos = '';
+    public CedulaEmpleado = '';
+    public TandaLaboral = TandaLaboral.Matutino;
+    public PorcentajeComision = 0.00;
+    public FechaIngreso = Date.now();
+    public AppUserId = '';
+    public Rentas: Renta[];
 }
-/**
- * public Guid Id { get; set; }
-        [Required]
-        public string Nombres { get; set; }
-        [Required]
-        public string Apellidos { get; set; }
-        [Required]
-        public string CedulaEmpleado { get; set; }
-        [Required]
-        public TandaLaboral TandaLaboral { get; set; }
-        [Required]
-        [DataType("money")]
-        public decimal PorcentajeComision { get; set; }
-        [Required]
-        public DateTime FechaIngreso { get; set; }
-        public bool Activo { get; set; }
-        [ForeignKey("AppUsers")]
-        public string AppUserId { get; set; }
-        public virtual AppUser AppUser { get; set; }
-        public virtual ICollection<Renta> Rentas { get; set; }
- */
