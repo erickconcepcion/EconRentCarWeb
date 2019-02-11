@@ -1,10 +1,167 @@
 import { Injectable } from '@angular/core';
+import { FormService } from '../dynamic-crud/models';
+import { Inspeccion } from '../models/inspeccion';
+import { DynamicFormGroupModel, DynamicInputModel, DynamicCheckboxModel, DynamicSelectModel } from '@ng-dynamic-forms/core';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class InspeccionFormService {
+export class InspeccionFormService implements FormService<Inspeccion> {
 
-constructor() { }
-
+  constructor() { }
+  public GetAddForm() {
+    return of([
+      new DynamicFormGroupModel(
+        {
+          id: 'data',
+          group: [
+            new DynamicSelectModel<string>(
+              {
+                id: 'RentaId',
+                placeholder: 'Renta'
+              }
+            ),
+            new DynamicCheckboxModel(
+              {
+                id: 'TieneRayaduras',
+                label: 'Tiene Rayaduras?',
+              }
+            ),
+            new DynamicInputModel(
+              {
+                id: 'GalonesCombustibles',
+                inputType: 'number',
+                placeholder: 'Galones de Combustibles',
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
+              }
+            ),
+            new DynamicCheckboxModel(
+              {
+                id: 'TieneGomaRepuesta',
+                label: 'Tiene Goma Repuesta?',
+              }
+            ),
+            new DynamicCheckboxModel(
+              {
+                id: 'TieneGato',
+                label: 'Tiene Gato?',
+              }
+            ),
+            new DynamicCheckboxModel(
+              {
+                id: 'CristalRoto',
+                label: 'Cristal Roto?',
+              }
+            ),
+            new DynamicCheckboxModel(
+              {
+                id: 'GomasDaniadas',
+                label: 'Gomas Dañadas?',
+              }
+            ),
+            new DynamicInputModel(
+              {
+                id: 'CargosExtra',
+                inputType: 'number',
+                placeholder: 'Cargos Extra',
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
+              }
+            )
+          ]
+        }
+      )
+    ]);
+  }
+  public GetModifyForm(data: Inspeccion) {
+    return of([
+      new DynamicFormGroupModel(
+        {
+          id: 'data',
+          group: [
+            new DynamicSelectModel<string>(
+              {
+                id: 'RentaId',
+                value: data.RentaId,
+                placeholder: 'Renta'
+              }
+            ),
+            new DynamicCheckboxModel(
+              {
+                id: 'TieneRayaduras',
+                value: data.TieneRayaduras,
+                label: 'Tiene Rayaduras?',
+              }
+            ),
+            new DynamicInputModel(
+              {
+                id: 'GalonesCombustibles',
+                value: data.GalonesCombustibles,
+                inputType: 'number',
+                placeholder: 'Galones de Combustibles',
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
+              }
+            ),
+            new DynamicCheckboxModel(
+              {
+                id: 'TieneGomaRepuesta',
+                value: data.TieneGomaRepuesta,
+                label: 'Tiene Goma Repuesta?',
+              }
+            ),
+            new DynamicCheckboxModel(
+              {
+                id: 'TieneGato',
+                value: data.TieneGato,
+                label: 'Tiene Gato?',
+              }
+            ),
+            new DynamicCheckboxModel(
+              {
+                id: 'CristalRoto',
+                value: data.CristalRoto,
+                label: 'Cristal Roto?',
+              }
+            ),
+            new DynamicCheckboxModel(
+              {
+                id: 'GomasDaniadas',
+                value: data.GomasDaniadas,
+                label: 'Gomas Dañadas?',
+              }
+            ),
+            new DynamicInputModel(
+              {
+                id: 'CargosExtra',
+                value: data.CargosExtra,
+                inputType: 'number',
+                placeholder: 'Cargos Extra',
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
+              }
+            )
+          ]
+        }
+      )
+    ]);
+  }
 }

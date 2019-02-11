@@ -9,7 +9,7 @@ export class Empleado implements BaseData {
     public CedulaEmpleado = '';
     public TandaLaboral = TandaLaboral.Matutino;
     public PorcentajeComision = 0.00;
-    public FechaIngreso = Date.now();
+    public FechaIngreso = new Date();
     public AppUserId = '';
     public Rentas: Renta[];
 }

@@ -7,16 +7,16 @@ import { Renta } from './renta';
 
 export class Vehiculo implements BaseData {
     public Id = '00000000-0000-0000-0000-000000000000';
-    Placa = '';
-    Descripcion = '';
-    NoChasis = '';
-    NoMotor = '';
-    EstadoVehiculo = EstadoVehiculo.Nuevo;
-    ModeloId = '00000000-0000-0000-0000-000000000000';
-    Modelo: Modelo;
-    TipoVehiculoId = '00000000-0000-0000-0000-000000000000';
-    TipoVehiculo: TipoVehiculo;
-    TipoCombustibleId = '00000000-0000-0000-0000-000000000000';
-    TipoCombustible: TipoCombustible;
-    Rentas: Renta[];
+    public Placa = '';
+    public Descripcion = '';
+    public NoChasis = '';
+    public NoMotor = '';
+    public EstadoVehiculo = EstadoVehiculo.Nuevo;
+    public ModeloId = '00000000-0000-0000-0000-000000000000';
+    public Modelo: Modelo;
+    public TipoVehiculoId = '00000000-0000-0000-0000-000000000000';
+    public TipoVehiculo: TipoVehiculo;
+    public TipoCombustibleId = '00000000-0000-0000-0000-000000000000';
+    public TipoCombustible: TipoCombustible;
+    public Rentas: Renta[];
 }
