@@ -4,6 +4,7 @@ import { InternalComponent } from './internal/internal.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { ExternalComponent } from './external/external.component';
+import { TipoCombustibleComponent } from './tipo-combustible/tipo-combustible.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,11 @@ const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: 'tipocombustibles',
+        component: TipoCombustibleComponent,
         canActivate: [AuthGuardService]
       }
     ]
