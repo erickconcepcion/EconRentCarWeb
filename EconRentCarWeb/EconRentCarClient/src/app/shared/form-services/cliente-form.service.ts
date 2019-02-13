@@ -46,6 +46,8 @@ export class ClienteFormService implements FormService<Cliente> {
               {
                 id: 'CedulaCliente',
                 placeholder: 'Cedula del Cliente',
+                mask: [ /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/ ],
+                maxLength: 13,
                 validators: {
                   required: null
                 },
@@ -58,6 +60,8 @@ export class ClienteFormService implements FormService<Cliente> {
               {
                 id: 'NoTArjetaCredito',
                 placeholder: 'No. Tarjeta de Credito',
+                mask: [ /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+                maxLength: 19,
                 validators: {
                   required: null
                 },
@@ -133,6 +137,8 @@ export class ClienteFormService implements FormService<Cliente> {
               {
                 id: 'CedulaCliente',
                 value: data.CedulaCliente,
+                mask: [ /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/ ],
+                maxLength: 13,
                 placeholder: 'Cedula del Cliente',
                 validators: {
                   required: null
@@ -146,6 +152,8 @@ export class ClienteFormService implements FormService<Cliente> {
               {
                 id: 'NoTArjetaCredito',
                 value: data.NoTArjetaCredito,
+                mask: [ /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+                maxLength: 19,
                 placeholder: 'No. Tarjeta de Credito',
                 validators: {
                   required: null

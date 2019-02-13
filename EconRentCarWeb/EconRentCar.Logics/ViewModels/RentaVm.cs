@@ -16,11 +16,11 @@ namespace EconRentCar.Logics.ViewModels
         public DateTime FechaDevolucion { get; set; }
         public string Comentario { get; set; }
         public EstadoRenta EstadoRenta { get; set; }
-        public int VehiculoId { get; set; }
+        public Guid VehiculoId { get; set; }
         public virtual VehiculoRefVm Vehiculo { get; set; }
-        public int EmpleadoId { get; set; }
+        public Guid EmpleadoId { get; set; }
         public virtual EmpleadoRefVm Empleado { get; set; }
-        public int ClienteId { get; set; }
+        public Guid ClienteId { get; set; }
         public virtual ClienteRefVm Cliente { get; set; }
         public virtual ICollection<InspeccionVm> Inspecciones { get; set; }
     }

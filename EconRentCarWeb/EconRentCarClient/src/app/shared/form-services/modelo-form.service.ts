@@ -3,13 +3,16 @@ import { DynamicCheckboxModel, DynamicInputModel, DynamicFormGroupModel, Dynamic
 import { Modelo } from '../models/modelo';
 import { FormService } from '../dynamic-crud/models';
 import { of } from 'rxjs';
+import { MarcaService } from '../services/marca.service';
+import { map } from 'rxjs/operators';
+import { EnumOptions } from '../dynamic-crud/utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModeloFormService implements FormService<Modelo> {
 
-  constructor() { }
+  constructor(private marcaS: MarcaService) { }
   public GetAddForm() {
     return of([
       new DynamicFormGroupModel(
@@ -62,7 +65,14 @@ export class ModeloFormService implements FormService<Modelo> {
             new DynamicSelectModel<string>(
               {
                 id: 'MarcaId',
-                placeholder: 'Marca'
+                placeholder: 'Marca',
+                options: this.marcaS.GetAll().pipe(map(d => d.map( da => ({label: da.Nombre, value: da.Id}) ) )),
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
               }
             ),
           ]
@@ -120,7 +130,14 @@ export class ModeloFormService implements FormService<Modelo> {
               {
                 id: 'MarcaId',
                 value: data.MarcaId,
-                placeholder: 'Marca'
+                placeholder: 'Marca',
+                options: this.marcaS.GetAll().pipe(map(d => d.map( da => ({label: da.Nombre, value: da.Id}) ) )),
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
               }
             ),
             new DynamicCheckboxModel(

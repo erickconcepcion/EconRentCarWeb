@@ -22,6 +22,7 @@ export class TipoVehiculoComponent implements OnInit {
         EditTitle: 'Editar Tipo de Vehiculo',
         AddTitle: 'Agregar Tipo de Vehiculo',
         ActionText: 'Acciones',
+        CanView: false,
         definition: { 'Id': 'Identificador', 'Nombre': 'Nombre', 'Descripcion': 'Descripcion', 'Activo': 'Activo' } as Definition,
         actionDefinitionKey: 'Actions',
       },

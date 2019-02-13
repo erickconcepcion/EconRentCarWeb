@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicTableModel, Definition } from '../shared/dynamic-crud/models';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, concatMap } from 'rxjs/operators';
 import { Empleado } from '../shared/models/empleado';
 import { EmpleadoFormService } from '../shared/form-services/empleado-form.service';
 import { EmpleadoService } from '../shared/services/empleado.service';
+import { GetLabels, changeEnum } from '../shared/dynamic-crud/utils';
+import { TandaLaboral } from '../shared/models/enums';
 
 @Component({
   selector: 'app-empleado',
@@ -22,9 +24,11 @@ export class EmpleadoComponent implements OnInit {
         EditTitle: 'Editar Empleado',
         AddTitle: 'Agregar Empleado',
         ActionText: 'Acciones',
-        definition: { 'Id': 'Identificador', 'TieneRayaduras': 'Tiene Rayaduras', 'GalonesCombustibles': 'Galones Combustibles',
-        'TieneGomaRepuesta': 'Tiene Goma Repuesta', 'TieneGato': 'Tiene Gato' } as Definition,
+        CanView: false,
+        definition: { 'Id': 'Identificador', 'Nombres': 'Nombres', 'Apellidos': 'Apellidos', 'CedulaEmpleado': 'Cedula Empleado',
+        'TandaLaboral': 'Tanda Laboral' } as Definition,
         actionDefinitionKey: 'Actions',
+        MetaLabels: { 'TandaLaboral': GetLabels(changeEnum(TandaLaboral))}
       },
       FormService: this.formService,
       InitValue: new Empleado(),
@@ -35,10 +39,10 @@ export class EmpleadoComponent implements OnInit {
         return this.service.Get(data.Id);
       },
       Add: (data: Empleado): Observable<Empleado> => {
-        return this.service.Post(data);
+        return this.service.Post(data).pipe(concatMap(r => this.service.Get(data.Id)));
       },
       Edit: (data: Empleado): Observable<Empleado> => {
-        return this.service.Put(data.Id, data).pipe(map(r => data));
+        return this.service.Put(data.Id, data).pipe(concatMap(r => this.service.Get(data.Id)));
       },
       Delete: (data: Empleado): Observable<Empleado> => {
         return this.service.Delete(data.Id).pipe(map(r => data));

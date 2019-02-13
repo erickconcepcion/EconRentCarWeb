@@ -17,7 +17,8 @@ namespace EconRentCar.Api.Controllers
     [ApiController]
     public class EmpleadosController : EntityBaseApiController<Empleado, EmpleadoVm>
     {
-        public EmpleadosController(IEmpleadoService _service, IMapper _mapper): base(_service, _mapper)
+        public EmpleadosController(IEmpleadoService _service, IMapper _mapper): 
+            base(_service, _mapper, "Rentas,Rentas.Vehiculo,Rentas.Cliente")
         {
 
         }

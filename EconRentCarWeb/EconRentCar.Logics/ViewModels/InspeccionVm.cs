@@ -11,7 +11,7 @@ namespace EconRentCar.Logics.ViewModels
     public class InspeccionVm : IViewModel
     {
         public Guid Id { get; set; }
-        public int RentaId { get; set; }
+        public Guid RentaId { get; set; }
         public virtual RentaRefVm Renta { get; set; }
         public bool TieneRayaduras { get; set; }
         public decimal GalonesCombustibles { get; set; }

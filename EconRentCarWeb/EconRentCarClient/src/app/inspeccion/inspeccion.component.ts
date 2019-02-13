@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicTableModel, Definition } from '../shared/dynamic-crud/models';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, concatMap } from 'rxjs/operators';
 import { Inspeccion } from '../shared/models/inspeccion';
 import { InspeccionFormService } from '../shared/form-services/inspeccion-form.service';
 import { InspeccionService } from '../shared/services/inspeccion.service';
@@ -14,15 +14,17 @@ import { InspeccionService } from '../shared/services/inspeccion.service';
 export class InspeccionComponent implements OnInit {
 
   constructor(public formService: InspeccionFormService, public service: InspeccionService) { }
-  private title = 'Tipos de Vehiculos';
+  private title = 'Inspecciones';
   public model: DynamicTableModel<Inspeccion>;
   ngOnInit() {
     this.model = {
       InterfaceConfig: {
-        EditTitle: 'Editar Tipo de Vehiculo',
-        AddTitle: 'Agregar Tipo de Vehiculo',
+        EditTitle: 'Editar Inspeccion',
+        AddTitle: 'Agregar Inspeccion',
         ActionText: 'Acciones',
-        definition: { 'Id': 'Identificador', 'Nombre': 'Nombre', 'Descripcion': 'Descripcion', 'Activo': 'Activo' } as Definition,
+        CanView: false,
+        definition: { 'Id': 'Identificador', 'TieneRayaduras': 'Tiene Rayaduras', 'GalonesCombustibles': 'Galones Combustibles',
+        'TieneGomaRepuesta': 'Tiene Goma Repuesta', 'TieneGato': 'Tiene Gato' } as Definition,
         actionDefinitionKey: 'Actions',
       },
       FormService: this.formService,
@@ -34,10 +36,10 @@ export class InspeccionComponent implements OnInit {
         return this.service.Get(data.Id);
       },
       Add: (data: Inspeccion): Observable<Inspeccion> => {
-        return this.service.Post(data);
+        return this.service.Post(data).pipe(concatMap(r => this.service.Get(data.Id)));
       },
       Edit: (data: Inspeccion): Observable<Inspeccion> => {
-        return this.service.Put(data.Id, data).pipe(map(r => data));
+        return this.service.Put(data.Id, data).pipe(concatMap(r => this.service.Get(data.Id)));
       },
       Delete: (data: Inspeccion): Observable<Inspeccion> => {
         return this.service.Delete(data.Id).pipe(map(r => data));

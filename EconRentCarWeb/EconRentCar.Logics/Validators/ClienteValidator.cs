@@ -44,9 +44,7 @@ namespace EconRentCar.Logics.Validators
                 .MinimumLength(19)
                 .WithMessage(CommonValidatorMessages.Min)
                 .MaximumLength(19)
-                .WithMessage(CommonValidatorMessages.Max)
-                .Matches(@"\d{3}-\d{7}-\d{1}")
-                .WithMessage(CommonValidatorMessages.MissMatch)           
+                .WithMessage(CommonValidatorMessages.Max)        
                 .Matches(@"\d{4}-\d{4}-\d{4}-\d{4}")
                 .WithMessage(CommonValidatorMessages.MissMatch);
 

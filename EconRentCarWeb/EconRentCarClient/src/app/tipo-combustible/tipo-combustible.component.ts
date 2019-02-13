@@ -23,6 +23,7 @@ export class TipoCombustibleComponent implements OnInit {
         AddTitle: 'Agregar Tipo de Combustible',
         DialogWidth: '400px',
         ActionText: 'Acciones',
+        CanView: false,
         definition: { 'Id': 'Identificador', 'Nombre': 'Nombre', 'Activo': 'Activo' } as Definition,
         actionDefinitionKey: 'Actions',
       },

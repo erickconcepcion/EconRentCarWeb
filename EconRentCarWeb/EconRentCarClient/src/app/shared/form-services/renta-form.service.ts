@@ -6,13 +6,17 @@ import { DynamicFormGroupModel, DynamicSelectModel, DynamicInputModel,
 import { of } from 'rxjs';
 import { changeEnum } from '../dynamic-crud/utils';
 import { EstadoRenta } from '../models/enums';
+import { ClienteService } from '../services/cliente.service';
+import { VehiculoService } from '../services/vehiculo.service';
+import { EmpleadoService } from '../services/empleado.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RentaFormService implements FormService<Renta> {
 
-  constructor() { }
+  constructor(private clienteS: ClienteService, private vehiculoS: VehiculoService, private empleadoS: EmpleadoService) { }
   public GetAddForm() {
     return of([
       new DynamicFormGroupModel(
@@ -65,19 +69,40 @@ export class RentaFormService implements FormService<Renta> {
             new DynamicSelectModel<string>(
               {
                 id: 'VehiculoId',
-                placeholder: 'Vehiculo'
+                placeholder: 'Vehiculo',
+                options: this.vehiculoS.GetAll().pipe(map(d => d.map( da => ({label: da.Placa, value: da.Id}) ) )),
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
               }
             ),
             new DynamicSelectModel<string>(
               {
                 id: 'EmpleadoId',
-                placeholder: 'Empleado'
+                placeholder: 'Empleado',
+                options: this.empleadoS.GetAll().pipe(map(d => d.map( da => ({label: da.CedulaEmpleado, value: da.Id}) ) )),
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
               }
             ),
             new DynamicSelectModel<string>(
               {
                 id: 'ClienteId',
-                placeholder: 'Cliente'
+                placeholder: 'Cliente',
+                options: this.clienteS.GetAll().pipe(map(d => d.map( da => ({label: da.CedulaCliente, value: da.Id}) ) )),
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
               }
             ),
           ]
@@ -142,21 +167,42 @@ export class RentaFormService implements FormService<Renta> {
               {
                 id: 'VehiculoId',
                 value: data.VehiculoId,
-                placeholder: 'Vehiculo'
+                placeholder: 'Vehiculo',
+                options: this.vehiculoS.GetAll().pipe(map(d => d.map( da => ({label: da.Placa, value: da.Id}) ) )),
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
               }
             ),
             new DynamicSelectModel<string>(
               {
                 id: 'EmpleadoId',
                 value: data.EmpleadoId,
-                placeholder: 'Empleado'
+                placeholder: 'Empleado',
+                options: this.empleadoS.GetAll().pipe(map(d => d.map( da => ({label: da.CedulaEmpleado, value: da.Id}) ) )),
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
               }
             ),
             new DynamicSelectModel<string>(
               {
                 id: 'ClienteId',
                 value: data.ClienteId,
-                placeholder: 'Cliente'
+                placeholder: 'Cliente',
+                options: this.clienteS.GetAll().pipe(map(d => d.map( da => ({label: da.CedulaCliente, value: da.Id}) ) )),
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
               }
             ),
           ]

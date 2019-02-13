@@ -47,6 +47,8 @@ export class EmpleadoFormService  implements FormService<Empleado> {
               {
                 id: 'CedulaEmpleado',
                 placeholder: 'Cedula del Empleado',
+                mask: [ /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/ ],
+                maxLength: 13,
                 validators: {
                   required: null
                 },
@@ -67,6 +69,18 @@ export class EmpleadoFormService  implements FormService<Empleado> {
                 id: 'PorcentajeComision',
                 inputType: 'number',
                 placeholder: 'Porcentaje de Comision',
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
+              }
+            ),
+            new DynamicDatePickerModel(
+              {
+                id: 'FechaIngreso',
+                placeholder: 'Fecha Ingreso',
                 validators: {
                   required: null
                 },
@@ -123,6 +137,8 @@ export class EmpleadoFormService  implements FormService<Empleado> {
                 id: 'CedulaEmpleado',
                 value: data.CedulaEmpleado,
                 placeholder: 'Cedula del Empleado',
+                mask: [ /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/ ],
+                maxLength: 13,
                 validators: {
                   required: null
                 },
@@ -157,13 +173,19 @@ export class EmpleadoFormService  implements FormService<Empleado> {
               {
                 id: 'FechaIngreso',
                 value: data.FechaIngreso,
-                placeholder: 'Porcentaje de Comision',
+                placeholder: 'Fecha Ingreso',
                 validators: {
                   required: null
                 },
                 errorMessages: {
                   required: 'Este campo es requerido'
                 }
+              }
+            ),
+            new DynamicCheckboxModel(
+              {
+                id: 'Activo',
+                label: 'Activo'
               }
             )
           ]

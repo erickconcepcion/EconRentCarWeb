@@ -129,13 +129,14 @@ export class DynamicTableComponent<T extends BaseData> implements OnInit {
   }
 
   compareAndAsign(before: T, after: any): T {
-    const elementKeys = Object.keys(before);
+    const data = Object.assign({}, before);
+    const elementKeys = Object.keys(data);
     for (let myKey = 0; myKey < elementKeys.length; myKey++) {
       if (elementKeys[myKey] in after) {
-        before[elementKeys[myKey]] = after[elementKeys[myKey]];
+        data[elementKeys[myKey]] = after[elementKeys[myKey]];
       }
     }
-    return before;
+    return data;
   }
 
   viewData(data: T) {
@@ -224,7 +225,7 @@ export class DynamicTableComponent<T extends BaseData> implements OnInit {
     }, error => {
       const errors = error as ErrorMessage;
       this.inTrafic = false;
-      this.messageBox.Error(errors.Title, errors.ValidationErrors);
+      // this.messageBox.Error(errors.Title, errors.ValidationErrors);
       console.log(error);
     });
   }

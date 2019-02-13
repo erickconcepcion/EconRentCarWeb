@@ -17,11 +17,11 @@ namespace EconRentCar.Logics.ViewModels
         public string NoChasis { get; set; }
         public string NoMotor { get; set; }
         public EstadoVehiculo EstadoVehiculo { get; set; }
-        public int ModeloId { get; set; }
+        public Guid ModeloId { get; set; }
         public virtual ModeloRefVm Modelo { get; set; }
-        public int TipoVehiculoId { get; set; }
+        public Guid TipoVehiculoId { get; set; }
         public virtual TipoVehiculoRefVm TipoVehiculo { get; set; }
-        public int TipoCombustibleId { get; set; }
+        public Guid TipoCombustibleId { get; set; }
         public virtual TipoCombustibleRefVm TipoCombustible { get; set; }
         public virtual ICollection<RentaRefVm> Rentas { get; set; }
 

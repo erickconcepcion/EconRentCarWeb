@@ -3,13 +3,15 @@ import { FormService } from '../dynamic-crud/models';
 import { Inspeccion } from '../models/inspeccion';
 import { DynamicFormGroupModel, DynamicInputModel, DynamicCheckboxModel, DynamicSelectModel } from '@ng-dynamic-forms/core';
 import { of } from 'rxjs';
+import { RentaService } from '../services/renta.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InspeccionFormService implements FormService<Inspeccion> {
 
-  constructor() { }
+  constructor(private rentaS: RentaService) { }
   public GetAddForm() {
     return of([
       new DynamicFormGroupModel(
@@ -19,7 +21,15 @@ export class InspeccionFormService implements FormService<Inspeccion> {
             new DynamicSelectModel<string>(
               {
                 id: 'RentaId',
-                placeholder: 'Renta'
+                placeholder: 'Renta',
+                options: this.rentaS.GetAll().pipe(map(d => d.map( da =>
+                  ({label: `${da.Cliente.Nombres} - ${da.Vehiculo.Placa}`, value: da.Id}) ) )),
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
               }
             ),
             new DynamicCheckboxModel(
@@ -93,7 +103,9 @@ export class InspeccionFormService implements FormService<Inspeccion> {
               {
                 id: 'RentaId',
                 value: data.RentaId,
-                placeholder: 'Renta'
+                placeholder: 'Renta',
+                options: this.rentaS.GetAll().pipe(map(d => d.map( da =>
+                  ({label: `${da.Cliente.Nombres} - ${da.Vehiculo.Placa}`, value: da.Id}) ) )),
               }
             ),
             new DynamicCheckboxModel(

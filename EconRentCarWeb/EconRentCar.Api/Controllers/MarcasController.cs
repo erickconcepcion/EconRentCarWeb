@@ -17,7 +17,7 @@ namespace EconRentCar.Api.Controllers
     [ApiController]
     public class MarcasController : EntityBaseApiController<Marca, MarcaVm>
     {
-        public MarcasController(IMarcaService _service, IMapper _mapper): base(_service, _mapper)
+        public MarcasController(IMarcaService _service, IMapper _mapper): base(_service, _mapper, "Modelos")
         {
 
         }

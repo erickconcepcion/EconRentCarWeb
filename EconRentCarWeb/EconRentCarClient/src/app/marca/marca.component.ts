@@ -14,14 +14,15 @@ import { MarcaService } from '../shared/services/marca.service';
 export class MarcaComponent implements OnInit {
 
   constructor(public formService: MarcaFormService, public service: MarcaService) { }
-  private title = 'Tipos de Vehiculos';
+  private title = 'Marcas';
   public model: DynamicTableModel<Marca>;
   ngOnInit() {
     this.model = {
       InterfaceConfig: {
-        EditTitle: 'Editar Tipo de Vehiculo',
-        AddTitle: 'Agregar Tipo de Vehiculo',
+        EditTitle: 'Editar Marca',
+        AddTitle: 'Agregar Marca',
         ActionText: 'Acciones',
+        CanView: false,
         definition: { 'Id': 'Identificador', 'Nombre': 'Nombre', 'Descripcion': 'Descripcion', 'Activo': 'Activo' } as Definition,
         actionDefinitionKey: 'Actions',
       },

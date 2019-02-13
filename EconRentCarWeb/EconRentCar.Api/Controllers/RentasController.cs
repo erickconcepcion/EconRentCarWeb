@@ -17,7 +17,8 @@ namespace EconRentCar.Api.Controllers
     [ApiController]
     public class RentasController : EntityBaseApiController<Renta, RentaVm>
     {
-        public RentasController(IRentaService _service, IMapper _mapper): base(_service, _mapper)
+        public RentasController(IRentaService _service, IMapper _mapper): 
+            base(_service, _mapper, "Vehiculo,Empleado,Cliente")
         {
 
         }

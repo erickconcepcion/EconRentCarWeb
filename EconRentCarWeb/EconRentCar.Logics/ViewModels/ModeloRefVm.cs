@@ -15,7 +15,7 @@ namespace EconRentCar.Logics.ViewModels
         public string Descripcion { get; set; }
         public decimal MontoPorDia { get; set; }
         public bool Activo { get; set; }
-        public int MarcaId { get; set; }
+        public Guid MarcaId { get; set; }
         public virtual MarcaRefVm Marca { get; set; }
     }
 }

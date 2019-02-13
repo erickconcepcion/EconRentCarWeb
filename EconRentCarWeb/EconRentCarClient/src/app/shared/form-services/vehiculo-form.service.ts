@@ -5,13 +5,17 @@ import { Vehiculo } from '../models/vehiculo';
 import { FormService } from '../dynamic-crud/models';
 import { EstadoVehiculo } from '../models/enums';
 import { changeEnum } from '../dynamic-crud/utils';
+import { ModeloService } from '../services/modelo.service';
+import { TipoCombustibleService } from '../services/tipo-combustible.service';
+import { TipoVehiculoService } from '../services/tipo-vehiculo.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehiculoFormService implements FormService<Vehiculo> {
 
-  constructor() { }
+  constructor(private modeloS: ModeloService, private tcombS: TipoCombustibleService, private tvehiculoS: TipoVehiculoService) { }
   public GetAddForm() {
     return of([
       new DynamicFormGroupModel(
@@ -22,6 +26,8 @@ export class VehiculoFormService implements FormService<Vehiculo> {
               {
                 id: 'Placa',
                 placeholder: 'Placa',
+                mask: [ /[A-Z]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/],
+                maxLength: 7,
                 validators: {
                   required: null
                 },
@@ -46,6 +52,8 @@ export class VehiculoFormService implements FormService<Vehiculo> {
               {
                 id: 'NoChasis',
                 placeholder: 'No. Chasis',
+                mask: [ /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/],
+                maxLength: 7,
                 validators: {
                   required: null
                 },
@@ -58,6 +66,8 @@ export class VehiculoFormService implements FormService<Vehiculo> {
               {
                 id: 'NoMotor',
                 placeholder: 'NoMotor',
+                mask: [ /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/],
+                maxLength: 7,
                 validators: {
                   required: null
                 },
@@ -76,19 +86,40 @@ export class VehiculoFormService implements FormService<Vehiculo> {
             new DynamicSelectModel<string>(
               {
                 id: 'ModeloId',
-                placeholder: 'Modelo'
+                placeholder: 'Modelo',
+                options: this.modeloS.GetAll().pipe(map(d => d.map( da => ({label: da.Nombre, value: da.Id}) ) )),
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
               }
             ),
             new DynamicSelectModel<string>(
               {
                 id: 'TipoVehiculoId',
-                placeholder: 'TipoVehiculo'
+                placeholder: 'TipoVehiculo',
+                options: this.tvehiculoS.GetAll().pipe(map(d => d.map( da => ({label: da.Nombre, value: da.Id}) ) )),
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
               }
             ),
             new DynamicSelectModel<string>(
               {
                 id: 'TipoCombustibleId',
-                placeholder: 'Tipo de Combustible'
+                placeholder: 'Tipo de Combustible',
+                options: this.tcombS.GetAll().pipe(map(d => d.map( da => ({label: da.Nombre, value: da.Id}) ) )),
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
               }
             ),
           ]
@@ -106,6 +137,8 @@ export class VehiculoFormService implements FormService<Vehiculo> {
               {
                 id: 'Placa',
                 value: data.Placa,
+                mask: [ /[A-Z]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/],
+                maxLength: 7,
                 placeholder: 'Placa',
                 validators: {
                   required: null
@@ -132,6 +165,8 @@ export class VehiculoFormService implements FormService<Vehiculo> {
               {
                 id: 'NoChasis',
                 value: data.NoChasis,
+                mask: [ /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/],
+                maxLength: 7,
                 placeholder: 'No. Chasis',
                 validators: {
                   required: null
@@ -145,6 +180,8 @@ export class VehiculoFormService implements FormService<Vehiculo> {
               {
                 id: 'NoMotor',
                 value: data.NoMotor,
+                mask: [ /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/],
+                maxLength: 7,
                 placeholder: 'NoMotor',
                 validators: {
                   required: null
@@ -166,21 +203,42 @@ export class VehiculoFormService implements FormService<Vehiculo> {
               {
                 id: 'ModeloId',
                 value: data.ModeloId,
-                placeholder: 'Modelo'
+                placeholder: 'Modelo',
+                options: this.modeloS.GetAll().pipe(map(d => d.map( da => ({label: da.Nombre, value: da.Id}) ) )),
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
               }
             ),
             new DynamicSelectModel<string>(
               {
                 id: 'TipoVehiculoId',
                 value: data.TipoVehiculoId,
-                placeholder: 'TipoVehiculo'
+                placeholder: 'TipoVehiculo',
+                options: this.tvehiculoS.GetAll().pipe(map(d => d.map( da => ({label: da.Nombre, value: da.Id}) ) )),
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
               }
             ),
             new DynamicSelectModel<string>(
               {
                 id: 'TipoCombustibleId',
                 value: data.TipoCombustibleId,
-                placeholder: 'Tipo de Combustible'
+                placeholder: 'Tipo de Combustible',
+                options: this.tcombS.GetAll().pipe(map(d => d.map( da => ({label: da.Nombre, value: da.Id}) ) )),
+                validators: {
+                  required: null
+                },
+                errorMessages: {
+                  required: 'Este campo es requerido'
+                }
               }
             ),
           ]

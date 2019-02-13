@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicTableModel, Definition } from '../shared/dynamic-crud/models';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, concatMap } from 'rxjs/operators';
 import { Cliente } from '../shared/models/cliente';
 import { ClienteService } from '../shared/services/cliente.service';
 import { ClienteFormService } from '../shared/form-services/cliente-form.service';
@@ -22,6 +22,7 @@ export class ClienteComponent implements OnInit {
         EditTitle: 'Editar Cliente',
         AddTitle: 'Agregar Cliente',
         ActionText: 'Acciones',
+        CanView: false,
         definition: { 'Id': 'Identificador', 'Nombres': 'Nombres', 'Apellidos': 'Apellidos', 'CedulaCliente': 'Cedula Cliente',
       'NoTArjetaCredito': 'No. Tarjeta Credito' } as Definition,
         actionDefinitionKey: 'Actions',
@@ -35,10 +36,10 @@ export class ClienteComponent implements OnInit {
         return this.service.Get(data.Id);
       },
       Add: (data: Cliente): Observable<Cliente> => {
-        return this.service.Post(data);
+        return this.service.Post(data).pipe(concatMap(r => this.service.Get(data.Id)));
       },
       Edit: (data: Cliente): Observable<Cliente> => {
-        return this.service.Put(data.Id, data).pipe(map(r => data));
+        return this.service.Put(data.Id, data).pipe(concatMap(r => this.service.Get(data.Id)));
       },
       Delete: (data: Cliente): Observable<Cliente> => {
         return this.service.Delete(data.Id).pipe(map(r => data));
