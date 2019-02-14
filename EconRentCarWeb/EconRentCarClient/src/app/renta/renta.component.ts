@@ -5,6 +5,8 @@ import { map, concatMap } from 'rxjs/operators';
 import { RentaFormService } from '../shared/form-services/renta-form.service';
 import { Renta } from '../shared/models/renta';
 import { RentaService } from '../shared/services/renta.service';
+import { GetLabels, changeEnum } from '../shared/dynamic-crud/utils';
+import { EstadoRenta } from '../shared/models/enums';
 
 @Component({
   selector: 'app-renta',
@@ -23,7 +25,8 @@ export class RentaComponent implements OnInit {
         AddTitle: 'Agregar Renta',
         ActionText: 'Acciones',
         CanView: false,
-        definition: { 'Id': 'Identificador', 'FechaRenta': 'Fecha Renta', 'FechaDevolucion': 'Fecha Devolucion',
+        MetaLabels: {'EstadoRenta': GetLabels(changeEnum(EstadoRenta))},
+        definition: { 'Id': 'Identificador', 'Vehiculo.Placa': 'Renta Vehiculo', 'Cliente.CedulaCliente': 'Cedula Cliente',
         'Comentario': 'Comentario', 'EstadoRenta': 'Estado Renta' } as Definition,
         actionDefinitionKey: 'Actions',
       },
@@ -36,7 +39,7 @@ export class RentaComponent implements OnInit {
         return this.service.Get(data.Id);
       },
       Add: (data: Renta): Observable<Renta> => {
-        return this.service.Post(data).pipe(concatMap(r => this.service.Get(data.Id)));
+        return this.service.Post(data).pipe(concatMap(r => this.service.Get(r.Id)));
       },
       Edit: (data: Renta): Observable<Renta> => {
         return this.service.Put(data.Id, data).pipe(concatMap(r => this.service.Get(data.Id)));

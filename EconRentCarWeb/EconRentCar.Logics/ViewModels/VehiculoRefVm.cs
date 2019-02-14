@@ -23,7 +23,6 @@ namespace EconRentCar.Logics.ViewModels
         public virtual TipoVehiculoRefVm TipoVehiculo { get; set; }
         public Guid TipoCombustibleId { get; set; }
         public virtual TipoCombustibleRefVm TipoCombustible { get; set; }
-        public virtual ICollection<RentaRefVm> Rentas { get; set; }
 
     }
 }

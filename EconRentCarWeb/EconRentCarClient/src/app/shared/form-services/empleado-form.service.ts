@@ -47,7 +47,6 @@ export class EmpleadoFormService  implements FormService<Empleado> {
               {
                 id: 'CedulaEmpleado',
                 placeholder: 'Cedula del Empleado',
-                mask: [ /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/ ],
                 maxLength: 13,
                 validators: {
                   required: null
@@ -137,7 +136,6 @@ export class EmpleadoFormService  implements FormService<Empleado> {
                 id: 'CedulaEmpleado',
                 value: data.CedulaEmpleado,
                 placeholder: 'Cedula del Empleado',
-                mask: [ /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/ ],
                 maxLength: 13,
                 validators: {
                   required: null

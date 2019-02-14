@@ -36,7 +36,7 @@ export class InspeccionComponent implements OnInit {
         return this.service.Get(data.Id);
       },
       Add: (data: Inspeccion): Observable<Inspeccion> => {
-        return this.service.Post(data).pipe(concatMap(r => this.service.Get(data.Id)));
+        return this.service.Post(data).pipe(concatMap(r => this.service.Get(r.Id)));
       },
       Edit: (data: Inspeccion): Observable<Inspeccion> => {
         return this.service.Put(data.Id, data).pipe(concatMap(r => this.service.Get(data.Id)));

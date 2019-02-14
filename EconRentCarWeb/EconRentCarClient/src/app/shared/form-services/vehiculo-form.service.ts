@@ -26,7 +26,6 @@ export class VehiculoFormService implements FormService<Vehiculo> {
               {
                 id: 'Placa',
                 placeholder: 'Placa',
-                mask: [ /[A-Z]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/],
                 maxLength: 7,
                 validators: {
                   required: null
@@ -52,7 +51,6 @@ export class VehiculoFormService implements FormService<Vehiculo> {
               {
                 id: 'NoChasis',
                 placeholder: 'No. Chasis',
-                mask: [ /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/],
                 maxLength: 7,
                 validators: {
                   required: null
@@ -66,7 +64,6 @@ export class VehiculoFormService implements FormService<Vehiculo> {
               {
                 id: 'NoMotor',
                 placeholder: 'NoMotor',
-                mask: [ /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/],
                 maxLength: 7,
                 validators: {
                   required: null
@@ -137,7 +134,6 @@ export class VehiculoFormService implements FormService<Vehiculo> {
               {
                 id: 'Placa',
                 value: data.Placa,
-                mask: [ /[A-Z]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/],
                 maxLength: 7,
                 placeholder: 'Placa',
                 validators: {
@@ -165,7 +161,6 @@ export class VehiculoFormService implements FormService<Vehiculo> {
               {
                 id: 'NoChasis',
                 value: data.NoChasis,
-                mask: [ /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/],
                 maxLength: 7,
                 placeholder: 'No. Chasis',
                 validators: {
@@ -180,7 +175,6 @@ export class VehiculoFormService implements FormService<Vehiculo> {
               {
                 id: 'NoMotor',
                 value: data.NoMotor,
-                mask: [ /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/],
                 maxLength: 7,
                 placeholder: 'NoMotor',
                 validators: {

@@ -59,7 +59,7 @@ export class DynamicTableComponent<T extends BaseData> implements OnInit {
     }, (error) => {
       const errors = error as ErrorMessage;
       this.inTrafic = false;
-      this.messageBox.Error(errors.Title, errors.ValidationErrors);
+      // this.messageBox.Error(errors.Title, errors.ValidationErrors);
     });
   }
 
